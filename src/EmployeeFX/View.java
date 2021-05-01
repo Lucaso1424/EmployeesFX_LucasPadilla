@@ -40,6 +40,7 @@ public class View {
     private TextField textField4;
     private TextField textField5;
     private Button createEmployee;
+    private Button updateEmployee;
     private Button filterBySurname;
     private Button filterAll;
     private TableView tableView;
@@ -187,6 +188,14 @@ public class View {
 
     public void setFilterAll(Button filterAll) {
         this.filterAll = filterAll;
+    }
+
+    public Button getUpdateEmployee() {
+        return updateEmployee;
+    }
+
+    public void setUpdateEmployee(Button updateEmployee) {
+        this.updateEmployee = updateEmployee;
     }
 
     // REALIZAMOS LA VISTA EN EL CONSTRUCTOR
@@ -357,12 +366,20 @@ public class View {
         AnchorPane.getChildren().add(tableView);
 
         createEmployee = new Button();
-        createEmployee.setLayoutX(50.0);
-        createEmployee.setLayoutY(70.0);
+        createEmployee.setLayoutX(650.0);
+        createEmployee.setLayoutY(20.0);
         createEmployee.setText("Create employee");
         createEmployee.setMnemonicParsing(false);
 
         AnchorPane.getChildren().add(createEmployee);
+
+        updateEmployee = new Button();
+        updateEmployee.setLayoutX(770.0);
+        updateEmployee.setLayoutY(20.0);
+        updateEmployee.setText("Update employee");
+        updateEmployee.setMnemonicParsing(false);
+
+        AnchorPane.getChildren().add(updateEmployee);
 
         filterBySurname = new Button();
         filterBySurname.setLayoutX(50.0);
@@ -373,7 +390,7 @@ public class View {
         AnchorPane.getChildren().add(filterBySurname);
 
         filterAll = new Button();
-        filterAll.setLayoutX(200.0);
+        filterAll.setLayoutX(180.0);
         filterAll.setLayoutY(20.0);
         filterAll.setText("Filter by all employees");
         filterAll.setMnemonicParsing(false);
