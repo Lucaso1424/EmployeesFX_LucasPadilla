@@ -20,6 +20,9 @@ import java.util.Properties;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 
 public class Controller {
 
@@ -38,6 +41,7 @@ public class Controller {
         loadTable();
         filterBySurname();
         filterSelectAll();
+        selectEntryTable();
     }
 
     public void loadTable() {
@@ -107,7 +111,7 @@ public class Controller {
                             try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
                                 // REALIZAMOS UNA QUERY PARA BORRAR LA ID (QUE ES LA CLAVE PRIMARIA)
                                 // PARA BORRAR TODA LA ENTRADA
-                                try (ResultSet rs = st.executeQuery("INSERT INTO employees(emp_no, first_name, last_name, birth_date, gender, hire_date) VALUES ('"+ vista.getTextField0().getText() + "','" + vista.getTextField1().getText() + "','" + vista.getTextField2().getText()  + "','" + vista.getTextField3().getText() + "','" + vista.getTextField4().getText() + "','" + vista.getTextField5().getText() + "');");) {
+                                try (ResultSet rs = st.executeQuery("INSERT INTO employees(emp_no, first_name, last_name, birth_date, gender, hire_date) VALUES ('" + vista.getTextField0().getText() + "','" + vista.getTextField1().getText() + "','" + vista.getTextField2().getText() + "','" + vista.getTextField3().getText() + "','" + vista.getTextField4().getText() + "','" + vista.getTextField5().getText() + "');");) {
                                 }
                             } catch (SQLException e) {
                                 System.err.println("Error SQL: " + e.getMessage());
@@ -141,7 +145,7 @@ public class Controller {
                 // NOS CONECTAMOS A LA BBDD A PARTIR DE UN TRY CATCH
                 try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
                     // REALIZAMOS UNA CONSULTA DE LA TABLA employees PARA QUE SÓLO FILTRE POR EL APELLIDO 'CAINE'
-                    try (ResultSet rs = st.executeQuery("SELECT * FROM employees WHERE last_name = '"  + vista.getTextField2().getText() + " ' LIMIT 10");) {
+                    try (ResultSet rs = st.executeQuery("SELECT * FROM employees WHERE last_name = '" + vista.getTextField2().getText() + " ' LIMIT 10");) {
                         // EN UN BUCLE, REALIZAMOS UNA COMPROBACIÓN DEL RESULTADO DE LA QUERY (rs)
                         while (rs.next()) {
                             int empNo = rs.getInt("emp_no");
@@ -245,6 +249,28 @@ public class Controller {
                     System.err.println("Error SQL: " + e.getMessage());
                 }
             }
+        });
+    }
+
+    // CREAMOS UNA FUNCIÓN PARA SELECCIONAR LOS VALORES DE UNA ENTRADA
+    public void selectEntryTable() {
+        vista.getTableView().setOnMouseClicked((event) -> {
+            TableView table = vista.getTableView();
+            // CREAMOS LA SELECCIÓN MULTIPLE DE LA CLASE TableViewSelectionModel
+            TableViewSelectionModel selectItem = table.getSelectionModel();
+            // SELECCIONAMOS SOLO 1 ITEM DE LA TABLA
+            selectItem.setSelectionMode(SelectionMode.SINGLE);
+            // CREAMOS UN NUEVO OBJETO MODEL ITEM PARA SELECCIONAR UN ITEM 
+            // Y GUARDARLO EN EL modelItem con el getSelectedItem()
+            Model modelItem = (Model) selectItem.getSelectedItem();
+            // DESPUES, HACEMOS LOS GETTERS DE LOS CAMPOS DE TextField, Y SETEAMOS 
+            // EL TEXTO DE EL modelItem, PASANDOLE UN toString O UN PARSE INT SI ES NECESARIO
+            vista.getTextField0().setText(Integer.toString(modelItem.getEmp_no()));
+            vista.getTextField1().setText((modelItem.getFirst_name()));
+            vista.getTextField2().setText((modelItem.getLast_name()));
+            vista.getTextField3().setText((modelItem.getBirth_date()).toString());
+            vista.getTextField4().setText((modelItem.getGender().toString()));
+            vista.getTextField5().setText((modelItem.getHire_date().toString()));
         });
     }
 }
