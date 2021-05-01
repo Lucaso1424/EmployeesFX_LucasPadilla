@@ -18,8 +18,11 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) {
 //        Model m = new Model();
+        // CARGAMOS LA VISTA
         Vista v = new Vista();
+        // CARGAMOS EL CONTROLADOR Y LE PASAMOS LA VISTA
         Controlador c = new Controlador(v);
+        // INICIAMOS EL CONTROLADOR
         c.initController();
 
         primaryStage.setTitle("EmployeeFX - Lucas Padilla Hidalgo");

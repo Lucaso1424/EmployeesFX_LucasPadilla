@@ -7,18 +7,15 @@ package EmployeeFX;
 
 import EmployeeFX.Controlador.Gender;
 import java.time.LocalDate;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import static javafx.scene.shape.StrokeType.OUTSIDE;
 import javafx.scene.text.Text;
 import static javafx.scene.text.TextAlignment.CENTER;
-import javafx.stage.Stage;
 
 /**
  *
@@ -26,6 +23,7 @@ import javafx.stage.Stage;
  */
 public class Vista {
 
+    // CREAMOS LAS INSTANCIAS PARA LOS VALORES DE LA VISTA
     private AnchorPane AnchorPane;
     private Text text1;
     private Text text2;
@@ -39,6 +37,7 @@ public class Vista {
     private Button buttonViewEmployee;
     private TableView tableView;
 
+    // REALIZAMOS LOS GETTERS Y SETTERS
     public AnchorPane getAnchorPane() {
         return AnchorPane;
     }
@@ -135,6 +134,7 @@ public class Vista {
         this.tableView = tableView;
     }
 
+    // REALIZAMOS LA VISTA EN EL CONSTRUCTOR
     public Vista() {
         AnchorPane = new AnchorPane();
 
@@ -201,11 +201,13 @@ public class Vista {
         textField3.setLayoutY(140.0);
 
         AnchorPane.getChildren().add(textField3);
-        TextField textField8 = new TextField();
-        textField8.setLayoutX(689.0);
-        textField8.setLayoutY(140.0);
+        
+        TextField textField4 = new TextField();
+        textField4.setLayoutX(689.0);
+        textField4.setLayoutY(140.0);
 
-        AnchorPane.getChildren().add(textField8);
+        AnchorPane.getChildren().add(textField4);
+        
         text5 = new Text();
         text5.setStrokeWidth(0.0);
         text5.setStrokeType(OUTSIDE);
@@ -216,6 +218,7 @@ public class Vista {
         text5.setWrappingWidth(304.13671875);
 
         AnchorPane.getChildren().add(text5);
+        
         tableView = new TableView();
         tableView.setPrefHeight(388.0);
         tableView.setPrefWidth(810.0);

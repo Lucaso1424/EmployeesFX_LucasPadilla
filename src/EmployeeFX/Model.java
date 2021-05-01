@@ -5,6 +5,7 @@
  */
 package EmployeeFX;
 
+import EmployeeFX.Controlador.Gender;
 import java.time.LocalDate;
 
 /**
@@ -13,14 +14,17 @@ import java.time.LocalDate;
  */
 public class Model {
 
+    // CREAMOS LAS INSTANCIAS PARA LOS VALORES DE LOS CAMPOS DE LA TABLA employees
     private int emp_no;
     private LocalDate birth_date;
     private String first_name;
     private String last_name;
-    private String gender;
+    private Gender gender;
     private LocalDate hire_date;
 
-    public Model(int emp_no, LocalDate birth_date, String first_name, String last_name, String gender, LocalDate hire_date) {
+    // REALIZAMOS UN CONSTRUCTOR DEL MODELO PARA PASARLE EN LOS INSERT 
+    // Y EL SELECT, PARA PASARLE LOS CAMPOS DE LA TABLA
+    public Model(int emp_no, LocalDate birth_date, String first_name, String last_name, Gender gender, LocalDate hire_date) {
         this.emp_no = emp_no;
         this.birth_date = birth_date;
         this.first_name = first_name;
@@ -28,7 +32,9 @@ public class Model {
         this.gender = gender;
         this.hire_date = hire_date;
     }
-
+    
+    // REALIZAMOS LOS GETTERS Y SETTERS DE CADA CAMPO DE LA TABLA
+    
     public int getEmp_no() {
         return emp_no;
     }
@@ -61,11 +67,11 @@ public class Model {
         this.last_name = last_name;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
