@@ -107,9 +107,7 @@ public class Controller {
                             try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
                                 // REALIZAMOS UNA QUERY PARA BORRAR LA ID (QUE ES LA CLAVE PRIMARIA)
                                 // PARA BORRAR TODA LA ENTRADA
-                                try (ResultSet rs = st.executeQuery("INSERT INTO employees(emp_no, first_name, last_name, birth_date, gender, hire_date) VALUES "
-                                        + "(" + vista.getTextField0() + ", " + vista.getTextField1().getText() + "," + vista.getTextField2().getText()  + "," + vista.getTextField3().getText() + "," + vista.getTextField4().getText() 
-                                        + "," + vista.getTextField5().getText() + ");\"");) {
+                                try (ResultSet rs = st.executeQuery("INSERT INTO employees(emp_no, first_name, last_name, birth_date, gender, hire_date) VALUES ('"+ vista.getTextField0().getText() + "','" + vista.getTextField1().getText() + "','" + vista.getTextField2().getText()  + "','" + vista.getTextField3().getText() + "','" + vista.getTextField4().getText() + "','" + vista.getTextField5().getText() + "');");) {
                                 }
                             } catch (SQLException e) {
                                 System.err.println("Error SQL: " + e.getMessage());
@@ -193,7 +191,6 @@ public class Controller {
         vista.getFilterAll().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("select all");
                 vista.getTableView().getItems().clear();
                 // GENERAMOS LA CONEXIÓN A LA BASE DE DATOS
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
