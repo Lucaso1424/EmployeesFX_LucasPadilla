@@ -42,6 +42,7 @@ public class Controller {
         filterBySurname();
         filterSelectAll();
         selectEntryTable();
+        modifyEmployee();
     }
 
     public void loadTable() {
@@ -129,6 +130,67 @@ public class Controller {
         }
     }
 
+    public void modifyEmployee() {
+        vista.getUpdateEmployee().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                vista.getTableView().getItems().clear();
+                // GENERAMOS LA CONEXIÓN A LA BASE DE DATOS
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String url = "jdbc:mysql://172.16.0.100:3306/employees";
+                Properties connectionProperties = new Properties();
+                // DEFINIMOS LAS PROPERTIES DE LA BBDD
+                connectionProperties.setProperty("user", "admin");
+                connectionProperties.setProperty("password", "1234");
+                // NOS CONECTAMOS A LA BBDD A PARTIR DE UN TRY CATCH
+                try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
+                    // REALIZAMOS UNA CONSULTA DE LA TABLA employees PARA QUE SÓLO FILTRE POR EL APELLIDO 'CAINE'
+                    try (ResultSet rs = st.executeQuery("UPDATE employees SET first_name='" + vista.getTextField1().getText() + "', last_name='" + vista.getTextField2().getText() + "', birth_date='" + vista.getTextField3().getText() + "', gender='" + vista.getTextField4().getText() + "', hire_date='" + vista.getTextField5().getText() + "' WHERE emp_no = '" + vista.getTextField0().getText() + "'");) {
+                        // EN UN BUCLE, REALIZAMOS UNA COMPROBACIÓN DEL RESULTADO DE LA QUERY (rs)
+                        while (rs.next()) {
+                            int empNo = rs.getInt("emp_no");
+                            LocalDate birthDate = rs.getDate("birth_date").toLocalDate();
+                            String firstName = rs.getString("first_name");
+                            String lastName = rs.getString("last_name");
+                            Gender gender = Gender.valueOf(rs.getString("gender"));
+                            LocalDate hireDate = rs.getDate("hire_date").toLocalDate();
+                            Button delete_button = new Button("Delete entry");
+                            // CARGAMOS LA VISTA, PARA HACER EL getTableView, Y CON UN getItems() HACEMOS EL .add(), Y PASAMOS TODAS LAS VARIABLES
+                            vista.getTableView().getItems().add(new Model(empNo, birthDate, firstName, lastName, gender, hireDate, delete_button));
+                            delete_button.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    // REALIZAMOS LA CONEXIÓN A LA BASE DE DATOS 
+                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                                    String url = "jdbc:mysql://172.16.0.100:3306/employees";
+                                    Properties connectionProperties = new Properties();
+                                    // DEFINIMOS LAS PROPERTIES DE LA BBDD
+                                    connectionProperties.setProperty("user", "admin");
+                                    connectionProperties.setProperty("password", "1234");
+                                    try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
+                                        // REALIZAMOS UNA QUERY PARA BORRAR LA ID (QUE ES LA CLAVE PRIMARIA)
+                                        // PARA BORRAR TODA LA ENTRADA
+                                        try (ResultSet rs = st.executeQuery("DELETE FROM employees WHERE emp_no = " + empNo);) {
+                                            System.out.println("Se ha borrado");
+                                        }
+                                    } catch (SQLException e) {
+                                        System.err.println("Error SQL: " + e.getMessage());
+                                    }
+                                    // HACEMOS UN CLEAR DEL LA TABLA, PARA BORRAR LA TABLA
+                                    vista.getTableView().getItems().clear();
+                                }
+                            });
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Error SQL: " + e.getMessage());
+                }
+                // CARGAMOS LA TABLA DE NUEVO
+                loadTable();
+            }
+        });
+    }
+
     // CREAMOS UNA FUNCIÓN PARA FILTRAR POR LOS APELLIDOS
     public void filterBySurname() {
         vista.getFilterBySurname().setOnAction(new EventHandler<ActionEvent>() {
@@ -178,7 +240,8 @@ public class Controller {
                                     }
                                     // HACEMOS UN CLEAR DEL LA TABLA, PARA BORRAR LA TABLA
                                     // CARGAMOS LA TABLA DE NUEVO
-                                    filterBySurname();
+                                    vista.getTableView().getItems().clear();
+                                    loadTable();
                                 }
                             });
                         }
