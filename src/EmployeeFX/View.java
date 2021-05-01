@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import static javafx.scene.shape.StrokeType.OUTSIDE;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import static javafx.scene.text.TextAlignment.CENTER;
 
@@ -31,11 +32,16 @@ public class View {
     private Text text3;
     private Text text4;
     private Text text5;
+    private Text text6;
+    private TextField textField0;
     private TextField textField1;
     private TextField textField2;
     private TextField textField3;
     private TextField textField4;
+    private TextField textField5;
     private Button createEmployee;
+    private Button filterBySurname;
+    private Button filterAll;
     private TableView tableView;
 
     public Text getText0() {
@@ -103,6 +109,14 @@ public class View {
         this.text5 = text5;
     }
 
+    public Text getText6() {
+        return text6;
+    }
+
+    public void setText6(Text text6) {
+        this.text6 = text6;
+    }
+
     public TextField getTextField1() {
         return textField1;
     }
@@ -135,6 +149,14 @@ public class View {
         this.textField4 = textField4;
     }
 
+    public TextField getTextField5() {
+        return textField5;
+    }
+
+    public void setTextField5(TextField textField5) {
+        this.textField5 = textField5;
+    }
+
     public TableView getTableView() {
         return tableView;
     }
@@ -143,20 +165,45 @@ public class View {
         this.tableView = tableView;
     }
 
+    public TextField getTextField0() {
+        return textField0;
+    }
+
+    public void setTextField0(TextField textField0) {
+        this.textField0 = textField0;
+    }
+
+    public Button getFilterBySurname() {
+        return filterBySurname;
+    }
+
+    public void setFilterBySurname(Button filterBySurname) {
+        this.filterBySurname = filterBySurname;
+    }
+
+    public Button getFilterAll() {
+        return filterAll;
+    }
+
+    public void setFilterAll(Button filterAll) {
+        this.filterAll = filterAll;
+    }
+
     // REALIZAMOS LA VISTA EN EL CONSTRUCTOR
     public View() {
         AnchorPane = new AnchorPane();
 
-//        text0 = new Text();
-//        text0.setStrokeWidth(0.0);
-//        text0.setStrokeType(OUTSIDE);
-//        text0.setTextAlignment(CENTER);
-//        text0.setLayoutX(14.0);
-//        text0.setLayoutY(129.0);
-//        text0.setText("ID");
-//        text0.setWrappingWidth(188.13671875);
-//
-//        AnchorPane.getChildren().add(text0);
+        text0 = new Text();
+        text0.setStrokeWidth(0.0);
+        text0.setStrokeType(OUTSIDE);
+        text0.setTextAlignment(CENTER);
+        text0.setLayoutX(240.0);
+        text0.setLayoutY(72.0);
+        text0.setText("ID");
+        text0.setWrappingWidth(188.13671875);
+
+        AnchorPane.getChildren().add(text0);
+
         text1 = new Text();
         text1.setStrokeWidth(0.0);
         text1.setStrokeType(OUTSIDE);
@@ -201,6 +248,14 @@ public class View {
 
         AnchorPane.getChildren().add(text4);
 
+        textField0 = new TextField();
+        textField0.setPrefHeight(10.0);
+        textField0.setPrefWidth(149.0);
+        textField0.setLayoutX(257.0);
+        textField0.setLayoutY(80.0);
+
+        AnchorPane.getChildren().add(textField0);
+
         textField1 = new TextField();
         textField1.setPrefHeight(10.0);
         textField1.setPrefWidth(149.0);
@@ -227,6 +282,12 @@ public class View {
 
         AnchorPane.getChildren().add(textField4);
 
+        textField5 = new TextField();
+        textField5.setLayoutX(590.0);
+        textField5.setLayoutY(80.0);
+
+        AnchorPane.getChildren().add(textField5);
+
         text5 = new Text();
         text5.setStrokeWidth(0.0);
         text5.setStrokeType(OUTSIDE);
@@ -234,9 +295,21 @@ public class View {
         text5.setLayoutX(305.0);
         text5.setLayoutY(44.0);
         text5.setText("EmployeesFX");
+        text5.setFont(Font.font(25));
         text5.setWrappingWidth(304.13671875);
 
         AnchorPane.getChildren().add(text5);
+
+        text6 = new Text();
+        text6.setStrokeWidth(0.0);
+        text6.setStrokeType(OUTSIDE);
+        text6.setTextAlignment(CENTER);
+        text6.setLayoutX(570.0);
+        text6.setLayoutY(72.0);
+        text6.setText("Hire Date");
+        text6.setWrappingWidth(188.13671875);
+
+        AnchorPane.getChildren().add(text6);
 
         tableView = new TableView();
         tableView.setPrefHeight(388.0);
@@ -282,7 +355,7 @@ public class View {
         tableView.getColumns().add(col7);
 
         AnchorPane.getChildren().add(tableView);
-        
+
         createEmployee = new Button();
         createEmployee.setLayoutX(50.0);
         createEmployee.setLayoutY(70.0);
@@ -291,6 +364,21 @@ public class View {
 
         AnchorPane.getChildren().add(createEmployee);
 
+        filterBySurname = new Button();
+        filterBySurname.setLayoutX(50.0);
+        filterBySurname.setLayoutY(20.0);
+        filterBySurname.setText("Filter by surname");
+        filterBySurname.setMnemonicParsing(false);
+
+        AnchorPane.getChildren().add(filterBySurname);
+
+        filterAll = new Button();
+        filterAll.setLayoutX(200.0);
+        filterAll.setLayoutY(20.0);
+        filterAll.setText("Filter by all employees");
+        filterAll.setMnemonicParsing(false);
+
+        AnchorPane.getChildren().add(filterAll);
     }
 
 }
