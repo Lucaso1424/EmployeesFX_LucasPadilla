@@ -91,11 +91,33 @@ public class Controller {
                             loadTable();
                         }
                     });
+
                     // REALIZAMOS UN EVENTO DE BOTON PARA LA CREACIÓN DE UN NUEVO EMPLEADO
                     vista.getCreateEmployee().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            System.out.println("rula evento");
+                            System.out.println("intento de inserción");
+                            // REALIZAMOS LA CONEXIÓN A LA BASE DE DATOS 
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            String url = "jdbc:mysql://172.16.0.100:3306/employees";
+                            Properties connectionProperties = new Properties();
+                            // DEFINIMOS LAS PROPERTIES DE LA BBDD
+                            connectionProperties.setProperty("user", "admin");
+                            connectionProperties.setProperty("password", "1234");
+                            try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
+                                // REALIZAMOS UNA QUERY PARA BORRAR LA ID (QUE ES LA CLAVE PRIMARIA)
+                                // PARA BORRAR TODA LA ENTRADA
+                                try (ResultSet rs = st.executeQuery("INSERT INTO employees(emp_no, first_name, last_name, birth_date, gender, hire_date) VALUES "
+                                        + "(" + vista.getTextField0() + ", " + vista.getTextField1().getText() + "," + vista.getTextField2().getText()  + "," + vista.getTextField3().getText() + "," + vista.getTextField4().getText() 
+                                        + "," + vista.getTextField5().getText() + ");\"");) {
+                                }
+                            } catch (SQLException e) {
+                                System.err.println("Error SQL: " + e.getMessage());
+                            }
+                            // HACEMOS UN CLEAR DEL LA TABLA, PARA BORRAR LA TABLA
+                            vista.getTableView().getItems().clear();
+                            // CARGAMOS LA TABLA DE NUEVO
+                            loadTable();
                         }
                     });
                 }
@@ -121,7 +143,7 @@ public class Controller {
                 // NOS CONECTAMOS A LA BBDD A PARTIR DE UN TRY CATCH
                 try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
                     // REALIZAMOS UNA CONSULTA DE LA TABLA employees PARA QUE SÓLO FILTRE POR EL APELLIDO 'CAINE'
-                    try (ResultSet rs = st.executeQuery("SELECT * FROM employees WHERE last_name = 'Caine' LIMIT 10");) {
+                    try (ResultSet rs = st.executeQuery("SELECT * FROM employees WHERE last_name = '"  + vista.getTextField2().getText() + " ' LIMIT 10");) {
                         // EN UN BUCLE, REALIZAMOS UNA COMPROBACIÓN DEL RESULTADO DE LA QUERY (rs)
                         while (rs.next()) {
                             int empNo = rs.getInt("emp_no");
