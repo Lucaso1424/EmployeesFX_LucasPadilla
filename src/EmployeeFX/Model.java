@@ -5,8 +5,9 @@
  */
 package EmployeeFX;
 
-import EmployeeFX.Controlador.Gender;
+import EmployeeFX.Controller.Gender;
 import java.time.LocalDate;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -21,20 +22,22 @@ public class Model {
     private String last_name;
     private Gender gender;
     private LocalDate hire_date;
+    private Button button;
+    private Button delete_button;
 
     // REALIZAMOS UN CONSTRUCTOR DEL MODELO PARA PASARLE EN LOS INSERT 
     // Y EL SELECT, PARA PASARLE LOS CAMPOS DE LA TABLA
-    public Model(int emp_no, LocalDate birth_date, String first_name, String last_name, Gender gender, LocalDate hire_date) {
+    public Model(int emp_no, LocalDate birth_date, String first_name, String last_name, Gender gender, LocalDate hire_date, Button delete_button) {
         this.emp_no = emp_no;
         this.birth_date = birth_date;
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
         this.hire_date = hire_date;
+        this.delete_button = delete_button;
     }
-    
+
     // REALIZAMOS LOS GETTERS Y SETTERS DE CADA CAMPO DE LA TABLA
-    
     public int getEmp_no() {
         return emp_no;
     }
@@ -82,6 +85,21 @@ public class Model {
     public void setHire_date(LocalDate hire_date) {
         this.hire_date = hire_date;
     }
-    
-    
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+
+    public Button getDelete_button() {
+        return delete_button;
+    }
+
+    public void setDelete_button(Button delete_button) {
+        this.delete_button = delete_button;
+    }
+
 }

@@ -17,11 +17,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage primaryStage) {
-//        Model m = new Model();
         // CARGAMOS LA VISTA
-        Vista v = new Vista();
+        View v = new View();
         // CARGAMOS EL CONTROLADOR Y LE PASAMOS LA VISTA
-        Controlador c = new Controlador(v);
+        Controller c = new Controller(v);
         // INICIAMOS EL CONTROLADOR
         c.initController();
 

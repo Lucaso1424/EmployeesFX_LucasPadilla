@@ -5,7 +5,7 @@
  */
 package EmployeeFX;
 
-import EmployeeFX.Controlador.Gender;
+import EmployeeFX.Controller.Gender;
 import java.time.LocalDate;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -21,10 +21,11 @@ import static javafx.scene.text.TextAlignment.CENTER;
  *
  * @author lucas
  */
-public class Vista {
+public class View {
 
     // CREAMOS LAS INSTANCIAS PARA LOS VALORES DE LA VISTA
     private AnchorPane AnchorPane;
+    private Text text0;
     private Text text1;
     private Text text2;
     private Text text3;
@@ -34,8 +35,24 @@ public class Vista {
     private TextField textField2;
     private TextField textField3;
     private TextField textField4;
-    private Button buttonViewEmployee;
+    private Button createEmployee;
     private TableView tableView;
+
+    public Text getText0() {
+        return text0;
+    }
+
+    public void setText0(Text text0) {
+        this.text0 = text0;
+    }
+
+    public Button getCreateEmployee() {
+        return createEmployee;
+    }
+
+    public void setCreateEmployee(Button createEmployee) {
+        this.createEmployee = createEmployee;
+    }
 
     // REALIZAMOS LOS GETTERS Y SETTERS
     public AnchorPane getAnchorPane() {
@@ -118,14 +135,6 @@ public class Vista {
         this.textField4 = textField4;
     }
 
-    public Button getButtonViewEmployee() {
-        return buttonViewEmployee;
-    }
-
-    public void setButtonViewEmployee(Button buttonViewEmployee) {
-        this.buttonViewEmployee = buttonViewEmployee;
-    }
-
     public TableView getTableView() {
         return tableView;
     }
@@ -135,9 +144,19 @@ public class Vista {
     }
 
     // REALIZAMOS LA VISTA EN EL CONSTRUCTOR
-    public Vista() {
+    public View() {
         AnchorPane = new AnchorPane();
 
+//        text0 = new Text();
+//        text0.setStrokeWidth(0.0);
+//        text0.setStrokeType(OUTSIDE);
+//        text0.setTextAlignment(CENTER);
+//        text0.setLayoutX(14.0);
+//        text0.setLayoutY(129.0);
+//        text0.setText("ID");
+//        text0.setWrappingWidth(188.13671875);
+//
+//        AnchorPane.getChildren().add(text0);
         text1 = new Text();
         text1.setStrokeWidth(0.0);
         text1.setStrokeType(OUTSIDE);
@@ -166,7 +185,7 @@ public class Vista {
         text3.setTextAlignment(CENTER);
         text3.setLayoutX(457.0);
         text3.setLayoutY(132.0);
-        text3.setText("Gender");
+        text3.setText("Birthdate");
         text3.setWrappingWidth(188.13671875);
 
         AnchorPane.getChildren().add(text3);
@@ -177,7 +196,7 @@ public class Vista {
         text4.setTextAlignment(CENTER);
         text4.setLayoutX(669.0);
         text4.setLayoutY(131.0);
-        text4.setText("Department");
+        text4.setText("Gender");
         text4.setWrappingWidth(188.13671875);
 
         AnchorPane.getChildren().add(text4);
@@ -201,13 +220,13 @@ public class Vista {
         textField3.setLayoutY(140.0);
 
         AnchorPane.getChildren().add(textField3);
-        
-        TextField textField4 = new TextField();
+
+        textField4 = new TextField();
         textField4.setLayoutX(689.0);
         textField4.setLayoutY(140.0);
 
         AnchorPane.getChildren().add(textField4);
-        
+
         text5 = new Text();
         text5.setStrokeWidth(0.0);
         text5.setStrokeType(OUTSIDE);
@@ -218,7 +237,7 @@ public class Vista {
         text5.setWrappingWidth(304.13671875);
 
         AnchorPane.getChildren().add(text5);
-        
+
         tableView = new TableView();
         tableView.setPrefHeight(388.0);
         tableView.setPrefWidth(810.0);
@@ -234,7 +253,7 @@ public class Vista {
         TableColumn<Model, String> col3 = new TableColumn<>("Surname");
         col3.setCellValueFactory(new PropertyValueFactory<>("last_name"));
 
-        TableColumn<Model, LocalDate> col4 = new TableColumn<>("Birthdate");
+        TableColumn<Model, LocalDate> col4 = new TableColumn<>("Birth Date");
         col4.setCellValueFactory(new PropertyValueFactory<>("birth_date"));
 
         TableColumn<Model, Gender> col5 = new TableColumn<>("Gender");
@@ -243,23 +262,35 @@ public class Vista {
         TableColumn<Model, LocalDate> col6 = new TableColumn<>("Hire date");
         col6.setCellValueFactory(new PropertyValueFactory<>("hire_date"));
 
+        TableColumn<Model, Button> col7 = new TableColumn<>("Delete entry");
+        col7.setCellValueFactory(new PropertyValueFactory<>("delete_button"));
+
+        col1.setPrefWidth(100);
+        col2.setPrefWidth(100);
+        col3.setPrefWidth(100);
+        col4.setPrefWidth(100);
+        col5.setPrefWidth(100);
+        col6.setPrefWidth(100);
+        col7.setPrefWidth(150);
+
         tableView.getColumns().add(col1);
         tableView.getColumns().add(col2);
         tableView.getColumns().add(col3);
         tableView.getColumns().add(col4);
         tableView.getColumns().add(col5);
         tableView.getColumns().add(col6);
+        tableView.getColumns().add(col7);
 
         AnchorPane.getChildren().add(tableView);
+        
+        createEmployee = new Button();
+        createEmployee.setLayoutX(50.0);
+        createEmployee.setLayoutY(70.0);
+        createEmployee.setText("Create employee");
+        createEmployee.setMnemonicParsing(false);
 
-        buttonViewEmployee = new Button();
-        buttonViewEmployee.setLayoutX(703.0);
-        buttonViewEmployee.setId("viewEmployee");
-        buttonViewEmployee.setLayoutY(22.0);
-        buttonViewEmployee.setText("Ver todos los empleados");
-        buttonViewEmployee.setMnemonicParsing(false);
+        AnchorPane.getChildren().add(createEmployee);
 
-        AnchorPane.getChildren().add(buttonViewEmployee);
     }
 
 }
