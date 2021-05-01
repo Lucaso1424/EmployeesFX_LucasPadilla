@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage primaryStage) {
-        Model m = new Model();
+//        Model m = new Model();
         Vista v = new Vista();
         Controlador c = new Controlador(v);
         c.initController();

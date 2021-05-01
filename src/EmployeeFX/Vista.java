@@ -5,10 +5,14 @@
  */
 package EmployeeFX;
 
+import EmployeeFX.Controlador.Gender;
+import java.time.LocalDate;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import static javafx.scene.shape.StrokeType.OUTSIDE;
@@ -20,7 +24,6 @@ import javafx.stage.Stage;
  *
  * @author lucas
  */
-
 public class Vista {
 
     private AnchorPane AnchorPane;
@@ -131,7 +134,7 @@ public class Vista {
     public void setTableView(TableView tableView) {
         this.tableView = tableView;
     }
-    
+
     public Vista() {
         AnchorPane = new AnchorPane();
 
@@ -145,7 +148,7 @@ public class Vista {
         text1.setWrappingWidth(188.13671875);
 
         AnchorPane.getChildren().add(text1);
-        
+
         text2 = new Text();
         text2.setStrokeWidth(0.0);
         text2.setStrokeType(OUTSIDE);
@@ -156,7 +159,7 @@ public class Vista {
         text2.setWrappingWidth(188.13671875);
 
         AnchorPane.getChildren().add(text2);
-        
+
         text3 = new Text();
         text3.setStrokeWidth(0.0);
         text3.setStrokeType(OUTSIDE);
@@ -167,7 +170,7 @@ public class Vista {
         text3.setWrappingWidth(188.13671875);
 
         AnchorPane.getChildren().add(text3);
-        
+
         text4 = new Text();
         text4.setStrokeWidth(0.0);
         text4.setStrokeType(OUTSIDE);
@@ -178,7 +181,7 @@ public class Vista {
         text4.setWrappingWidth(188.13671875);
 
         AnchorPane.getChildren().add(text4);
-        
+
         textField1 = new TextField();
         textField1.setPrefHeight(10.0);
         textField1.setPrefWidth(149.0);
@@ -186,13 +189,13 @@ public class Vista {
         textField1.setLayoutY(140.0);
 
         AnchorPane.getChildren().add(textField1);
-        
+
         textField2 = new TextField();
         textField2.setLayoutX(257.0);
         textField2.setLayoutY(140.0);
 
         AnchorPane.getChildren().add(textField2);
-        
+
         textField3 = new TextField();
         textField3.setLayoutX(477.0);
         textField3.setLayoutY(140.0);
@@ -219,8 +222,33 @@ public class Vista {
         tableView.setLayoutX(41.0);
         tableView.setLayoutY(184.0);
 
+        TableColumn<Model, Integer> col1 = new TableColumn<>("ID");
+        col1.setCellValueFactory(new PropertyValueFactory<>("emp_no"));
+
+        TableColumn<Model, String> col2 = new TableColumn<>("Name");
+        col2.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+
+        TableColumn<Model, String> col3 = new TableColumn<>("Surname");
+        col3.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+
+        TableColumn<Model, LocalDate> col4 = new TableColumn<>("Birthdate");
+        col4.setCellValueFactory(new PropertyValueFactory<>("birth_date"));
+
+        TableColumn<Model, Gender> col5 = new TableColumn<>("Gender");
+        col5.setCellValueFactory(new PropertyValueFactory<>("gender"));
+
+        TableColumn<Model, LocalDate> col6 = new TableColumn<>("Hire date");
+        col6.setCellValueFactory(new PropertyValueFactory<>("hire_date"));
+
+        tableView.getColumns().add(col1);
+        tableView.getColumns().add(col2);
+        tableView.getColumns().add(col3);
+        tableView.getColumns().add(col4);
+        tableView.getColumns().add(col5);
+        tableView.getColumns().add(col6);
+
         AnchorPane.getChildren().add(tableView);
-        
+
         buttonViewEmployee = new Button();
         buttonViewEmployee.setLayoutX(703.0);
         buttonViewEmployee.setId("viewEmployee");
