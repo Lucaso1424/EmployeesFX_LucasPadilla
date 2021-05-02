@@ -8,6 +8,8 @@
 
 2. Requisits
 
+- 2.1 Requisits obligatoris
+
 · La UI ha d’estar implementada en JavaFX. No es pot utilitzar fxml.
 
 · Cal separar la vista del model.
