@@ -20,3 +20,4 @@ Cal poder buscar treballadors per un rang de dates de contractació o bé per un
 
 (optatiu) Cal poder afegir un treballador a un departament.
 
+![imagen](https://user-images.githubusercontent.com/58809030/116812664-316ea400-ab50-11eb-87b9-ccded3a67ea6.png)
