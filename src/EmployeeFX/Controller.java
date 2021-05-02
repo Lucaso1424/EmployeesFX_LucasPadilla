@@ -206,8 +206,8 @@ public class Controller {
                 connectionProperties.setProperty("password", "1234");
                 // NOS CONECTAMOS A LA BBDD A PARTIR DE UN TRY CATCH
                 try (Connection con = DriverManager.getConnection(url, connectionProperties); Statement st = con.createStatement();) {
-                    // REALIZAMOS UNA CONSULTA DE LA TABLA employees PARA QUE SÓLO FILTRE POR EL APELLIDO 'CAINE'
-                    try (ResultSet rs = st.executeQuery("SELECT * FROM employees WHERE last_name = '" + vista.getTextField2().getText() + " ' LIMIT 10");) {
+                    // REALIZAMOS UNA CONSULTA DE LA TABLA employees PARA QUE FILTRE POR EL LIKE Y EL TEXTO ANTES DEL %
+                    try (ResultSet rs = st.executeQuery("SELECT * FROM employees WHERE last_name LIKE '" + vista.getTextField2().getText() + "%' LIMIT 10");) {
                         // EN UN BUCLE, REALIZAMOS UNA COMPROBACIÓN DEL RESULTADO DE LA QUERY (rs)
                         while (rs.next()) {
                             int empNo = rs.getInt("emp_no");
