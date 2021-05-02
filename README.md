@@ -8,18 +8,18 @@ La implementació és lliure sempre i quant es compleixin els següents requisit
 
 2. Requisits
 
-1 - Requisits obligatoris
+  1 - Requisits obligatoris
 
-  · La UI ha d’estar implementada en JavaFX. No es pot utilitzar fxml.
+    · La UI ha d’estar implementada en JavaFX. No es pot utilitzar fxml.
 
-  · Cal separar la vista del model.
+    · Cal separar la vista del model.
 
-  · Podeu utilitzar un control DatePicker per les dates.
+    · Podeu utilitzar un control DatePicker per les dates.
 
-  · L’aplicació no pot petar, cal comprovar tots valors entrats o modificats.
+    · L’aplicació no pot petar, cal comprovar tots valors entrats o modificats.
 
-  · Cal poder buscar treballadors per un rang de dates de contractació o bé per una part del seu cognom.
+    · Cal poder buscar treballadors per un rang de dates de contractació o bé per una part del seu cognom.
 
-  · (optatiu) Cal poder afegir un treballador a un departament.
+    · (optatiu) Cal poder afegir un treballador a un departament.
 
 ![imagen](https://user-images.githubusercontent.com/58809030/116812664-316ea400-ab50-11eb-87b9-ccded3a67ea6.png)
